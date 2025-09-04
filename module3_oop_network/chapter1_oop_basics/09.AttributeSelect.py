@@ -33,8 +33,8 @@ print(stu1.learn)#绑定函数
 stu1.learn() #learn(stu1)
 print(stu2.learn)
 
-# 对象和类中的属性冲突,优先使用对象中的
+# 对象和类中的属性冲突,优先使用对象中的,没有了才取类中找
 stu1.x = 'from stu1'
 LuffyStudent.x = 'from LuffyStudent'
-
 print(stu1.x)
+
