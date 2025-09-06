@@ -6,19 +6,19 @@ import abc
 class Animal(metaclass=abc.ABCMeta):
     # 3.为了保证子类必须使用这个方法名 需要在前面加一个装饰器
     @classmethod
-    @abc.abstractmethod
+
     def walk(self):
         pass
     @classmethod
-    @abc.abstractmethod
+
     def eat(self):
         pass
 
 class Pig(Animal):
-    @classmethod
+
     def walk(cls):
         print('is walking')
-    @classmethod
+
     def eat(cls):
         print('is eatting')
 pig = Pig()
