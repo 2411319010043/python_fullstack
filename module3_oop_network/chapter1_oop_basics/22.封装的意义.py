@@ -1,4 +1,4 @@
-# 1.封装数据属性:明确区别内外,
+# 1.封装数据属性:明确区别内外,控制外部对隐藏属性的操作
 class People:
     def __init__(self,name,age):
         self.__name = name
@@ -13,7 +13,7 @@ class People:
             return
         if not isinstance(age,int):
             print('年龄必须是数字类型')
-            # return
+            return
         self.__name = name
         self.__age = age
 
@@ -21,3 +21,28 @@ p = People('egon',18)
 
 p.set_info('nike','22')
 p.tell_info()
+
+
+# 2.封装方法:隔离复杂度
+
+class ATM:
+    def __card(self):
+        print('插卡')
+    def __auth(self):
+        print('用户认证')
+    def __input(self):
+        print('输入取款金额')
+    def __print_bill(self):
+        print('打印账单')
+    def __take_money(self):
+        print('取款')
+    
+    def withdraw(self):
+        self.__card()
+        self.__auth()
+        self.__input()
+        self.__print_bill()
+        self.__take_money()
+
+a = ATM()
+a.withdraw()
