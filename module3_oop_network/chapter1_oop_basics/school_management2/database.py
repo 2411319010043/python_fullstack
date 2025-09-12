@@ -4,16 +4,16 @@
 # 1.导入模块
 from sqlalchemy import create_engine,Column,Integer,String
 from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session
 
 # 数据库连接URL
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:123456@localhost/school_management2"
+SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:root@localhost/school_management2"
 
 # 创建引擎 数据库的大门或接口的管理员 他知道数据库在哪里 怎么连接 用什么密码
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 # 创建会话工厂 一个会话发放机
-SessionLocal = sessionmaker(autocommit=False,autoflush=False,bind = engine)
+SessionLocal = Session(autocommit=False,autoflush=False,bind = engine)
 
 # 创建一个自己的基类继承模型类的基类
 Base = declarative_base()

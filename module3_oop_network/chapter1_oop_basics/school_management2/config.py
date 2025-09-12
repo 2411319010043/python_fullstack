@@ -5,8 +5,8 @@ class Settings(BaseSettings):
     MYSQL_HOST:str = 'loclahost'
     MYSQL_PORT:int = 3306
     MYSQL_USER:str = 'root'
-    MYSQL_PSD:int = 123456
-    MYSQL_DATABASE:str = "school_management2"
+    MYSQL_PSD:int = 'root'
+    MYSQL_DATABASE:str = "school_management"
     class Config:
         env_file = ".env"
 

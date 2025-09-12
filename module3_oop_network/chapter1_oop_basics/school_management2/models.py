@@ -37,14 +37,14 @@ class Teacher(Base):
     email = Column(String(255),unique=True,index=True)
     password = Column(String(255),unique=True,index=True)
     # 关联上课记录表
-    class_record = relationship('Grade',back_populates='teachers')
+    class_records = relationship('class_record',back_populates='teachers')
     # 关联学校表
     # 创建外键只能是id
     school_id = Column(Integer,ForeignKey('schools.id'))
     # 关系映射
     school = relationship('School',back_populates='teachers')
     #关联课程表 一个教师有一个课程表 一个课程表也只能被一名老师创建 一对一的关系
-    course = relationship('Course',back_populates='course')
+    course = relationship('Course',back_populates='teacher')
     # 关联班级表 一名教师能管一个班 一个班也只能有一个老师 一对一的关系
     grade = relationship('Grade',back_populates='teacher')
     # 关联学生表
@@ -69,8 +69,8 @@ class Student(Base):
     teacher = relationship('Teacher',back_populates="students")
     # 关联上课信息表 多对多的关系 需要请外建一个表
     class_record = relationship('class_record',secondary=student_class_record_association,back_populates='student')
-    # classRecord_id = Column(String(255))
-    # classRecord = relationship("classRecord",back_populates="students")
+    # classrecord_id = Column(String(255))
+    # classrecord = relationship("classrecord",back_populates="students")
     # 关联课程表 一名学生只能查看本班一个的课程表 多对一的关系
     course_id = Column(Integer,ForeignKey('courses.id'))
     course = relationship('Course',back_populates="students")
@@ -84,17 +84,17 @@ class  Grade(Base):
     __tablename__ = "grades"
     id = Column(Integer,primary_key=True,index=True)
     name = Column(String(255),unique=True,index=True)
-    course = Column(String(255),unique=True,index=True)
+    course_name = Column(String(255),unique=True,index=True)
     # 与学校双向关联
     school_id = Column(Integer,ForeignKey('schools.id'))
-    school = relationship('School',back_populates='grade')
+    school = relationship('School',back_populates='grades')
     # 与上课信息相关联
-    class_record =  relationship("Grades",back_populates="class_record")
+    class_records =  relationship("class_record",back_populates="grade")
     # 与教师关联 一对一关系
     teacher_id = Column(Integer,ForeignKey('teachers.id'))
     teacher = relationship('Teacher',back_populates='grade')
     # 与课程表关联 一对一关系
-    course = relationship('Course',back_populates='grade')
+    # cours = relationship('Course',back_populates='grade',uselist=False)
     # 与学生表关联
     students = relationship('Student',back_populates='grade')
 
@@ -112,8 +112,8 @@ class Course(Base):
     # 与学生关联
     students = relationship('Student',back_populates="course")
     # 与班级管理 一对一
-    grade_id = Column(Integer,ForeignKey('grades.id'))
-    grade = relationship('Grade',back_populates='course')
+    # grade_id = Column(Integer,ForeignKey('grades.id'))
+    # grade = relationship('Grade',back_populates='course',uselist=False)
     # 与教师关联 一对一
     teacher_id = Column(Integer,ForeignKey('teachers.id'))
     teacher = relationship('Teacher',back_populates='course')
@@ -121,7 +121,7 @@ class Course(Base):
     # grades_id = Column(Integer,ForeignKey('Grade.id'))
     # grades = relationship('Grades',back_populates='course')
     # 与上课记录表相关联
-    class_record =  relationship("class_record",back_populates="course")
+    class_records =  relationship("class_record",back_populates="course")
 # 6.成绩表
 # class Grades(Base):
 #     id = Column(Integer,primary_key=True,index=True)

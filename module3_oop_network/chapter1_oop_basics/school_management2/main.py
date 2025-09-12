@@ -15,7 +15,9 @@ app.include_router(grade.router)
 app.include_router(students.router)
 app.include_router(teachers.router)
 # app.include_router(courses.router)  # 包含其他路由
-
+# 创建表
+Base.metadata.create_all(bind=engine)
+print("数据库表创建成功！")  # 添加这行来确认执行
 @app.get("/")
 def read_root():
     return {"message": "School Management System API"}
@@ -23,6 +25,3 @@ def read_root():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8002)
-# 创建表
-Base.metadata.create_all(bind=engine)
-print("数据库表创建成功！")  # 添加这行来确认执行
