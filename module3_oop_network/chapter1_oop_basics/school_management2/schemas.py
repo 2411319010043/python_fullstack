@@ -23,14 +23,24 @@ class TeacherLogin(AdminLogin):
 # class TeacherCreate(AdminCreate):
 #     pass 
 class TeacherResponse(AdminResponse):
-    pass 
+    id:int
+    username:str
+    class_id:str
+    email:EmailStr
+    class Config:
+        from_attributes = True 
 
 class StudentLogin(AdminLogin):
     pass 
 class StudentCreate(AdminCreate):
-    pass 
+    class_id:int
 class StudentResponse(AdminResponse):
-    pass
+    id:int
+    username:str
+    class_id:str
+    email:EmailStr
+    class Config:
+        from_attributes = True
 
 # 管理员创建学校功能
 class AdminCreateSchool(BaseModel):
@@ -57,7 +67,7 @@ class AdminCreateTeacher(BaseModel):
     course_id:Optional[int] = None
     grade_id: Optional[int] = None   
 # 管理员查看学生
-class AdminCheckStudent(BaseModel):
+class CheckStudent(BaseModel):
     name:str
     email:str
     school_id:Optional[int] = None
@@ -75,8 +85,14 @@ class AdminCheckTeacher(BaseModel):
     grade_id: Optional[int] = None
     class Config: #固定类名
         from_attributes = True #允许ORM转换
-
-# 教师创建上课记录表
+class CheckGrade(BaseModel):
+    id : int
+    name : str
+    course : str
+    school_id :Optional[int] = None
+    teacher_id :Optional[int] = None
+    course:Optional[int] = None
+    students :Optional[int] = None
 class TeacherCreateClass_record(BaseModel):
     lesson : int
     date : str

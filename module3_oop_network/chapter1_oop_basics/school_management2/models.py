@@ -1,6 +1,6 @@
-from sqlalchemy import Column,Integer,String,ForeignKey
+from sqlalchemy import Column,Integer,String,ForeignKey,Table
 from sqlalchemy.orm import relationship
-from .database import Base
+from database import Base
 
 
 
@@ -84,7 +84,6 @@ class  Grade(Base):
     __tablename__ = "grades"
     id = Column(Integer,primary_key=True,index=True)
     name = Column(String(255),unique=True,index=True)
-    school = Column(String(255),unique=True,index=True)
     course = Column(String(255),unique=True,index=True)
     # 与学校双向关联
     school_id = Column(Integer,ForeignKey('schools.id'))
@@ -144,7 +143,7 @@ class Course(Base):
 #     classRecord =  relationship("classRecord",back_populates="grades")
 # 7.上课记录表+成绩表
 class class_record(Base):
-    __tablename = "class_records"
+    __tablename__ = "class_records"
     id = Column(Integer,primary_key=True,index=True)
     lesson = Column(String(255),unique=True,index=True)
     date = Column(String(255),unique=True,index=True)
@@ -159,12 +158,9 @@ class class_record(Base):
     teacher_id = Column(Integer,ForeignKey('teachers.id'))
     teachers =  relationship("Teacher",back_populates="class_record")
     # 关联学生表 一张表可以被多名学生提交作业 一名学生只能提交一次
-    students = relationship("Student",back_populates="class_record")
-    # 关联教师表 多对一
-    teacher_id = Column(Integer,ForeignKey('teachers.id'))
-    teachers =  relationship("Teacher",back_populates="class_record")
+    
     # 成绩表
-    grades =  relationship("class_record",back_populates="class_record")
+    grades =  relationship("Grades",back_populates="class_record")
     # 关联班级表 多对一
     grade_id = Column(Integer,ForeignKey('grades.id'))
     grade =  relationship("Grade",back_populates="class_record")
