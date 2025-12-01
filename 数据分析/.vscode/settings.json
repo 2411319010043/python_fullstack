@@ -1,0 +1,12 @@
+{
+    "audioCues.enabled": "off",
+    "terminal.integrated.audibleBell": false,
+    "terminal.integrated.sendBell": false,
+    "jupyter.runStartupCommands": [],
+    "python.terminal.launchArgs": [
+        "-W",
+        "ignore"
+    ],
+    "accessibility.signalOptions.volume": 0
+
+}
