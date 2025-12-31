@@ -61,7 +61,7 @@ def dm03_split_train_test():
     # 1. 加载数据集
     iris_data = load_iris()
     # 2. 数据的预处理：从150个特征和标签中，按照 8：2的比例，切分训练集和测试集
-    # 参1：特征，参2：标签，参3：测试集的占比
+    # 参1：特征，参2：标签，参3：测试集的占比，参4：随机种子
     # 返回值：训练集的特征数据，测试集的特征数据，训练集的标签数据，测试集的标签数据
     x_train, x_test, y_train, y_test = train_test_split(iris_data.data, iris_data.target, test_size=0.2,random_state=23)
     # 3. 打印切割后的结果
@@ -69,10 +69,35 @@ def dm03_split_train_test():
     print(f'训练集的标签：{y_train}，个数：{len(y_train)}')
     print(f'测试集的特征：{x_test}，个数：{len(x_test)}')
     print(f'测试集的标签：{y_test}，个数：{len(y_test)}')
-# 4.
+
+# 4. 定义函数，实现鸢尾花完整案例--->加载数据，数据预处理，特征工程，模型训练，模型评估，模型预测
+def dm04_iris_evaluate_test():
+    # 1. 加载数据集
+    iris_data = load_iris()
+    # 2. 数据的预处理，这里是150条数据，按照 8：2的比例，切分训练集和测试集
+    x_train, x_test, y_train, y_test = train_test_split(iris_data.data, iris_data.target, test_size=0.2, random_state=23)
+    # 3. 特征工程
+    # 思考1：特征提取：因为源数据只有4个特征列，且都是我们用的，所以这里无需做特征提取
+    # 思考2：特征预处理：因为源数据的4列特征差值不大，所以我们无需做特征预处理，但是，加入特征预处理会让我们的代码更完善，所以加入
+        # 3.1 创建标准化对象
+    transfer = StandardScaler()
+        # 3.2 对特征列进行标准化，即：x_train:训练集的特征数据，x_test:测试集的特征数据
+        # fit_transform: 兼具fit和transform的功能，即：训练，转换，该函数适用于：第一次进行标准化的时候使用，一般用于处理：训练集
+    x_train = transfer.fit_transform(x_train)
+        # transform: 只有转换，该函数适用于：重复进行标准化动作时使用，一般用于对测试集进行标准化
+    x_test = transfer.transform(x_test)
+    # 4. 模型训练
+        # 4.1 创建模型对象
+    estimator = KNeighborsClassifier(n_neighbors=3)
+        # 4.2 具体的训练模型的动作
+    estimator.fit(x_train, y_train)  # 传入训练集的特征，训练集的标签
+    # 5. 模型预测
+        # 场景1：对刚才切分的
+    # 6. 模型评估
 
 # 5. 测试
 if __name__ == '__main__':
     dm01_load_iris()
     dm02_show_iris()
     dm03_split_train_test()
+    dm04_iris_evaluate_test()
