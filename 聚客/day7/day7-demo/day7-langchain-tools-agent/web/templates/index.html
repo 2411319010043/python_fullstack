@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>&#32508;&#21512; Agent &#27979;&#35797;&#39029;</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="panel">
+        <h1>&#32508;&#21512; Agent &#27979;&#35797;&#39029;</h1>
+        <p class="subtitle">
+          &#25903;&#25345;&#32842;&#22825;&#12289;&#22825;&#27668;&#12289;&#25628;&#32034;&#12289;&#30334;&#31185;&#21644;&#22270;&#29255;&#29702;&#35299;&#12290;
+        </p>
+
+        <form id="agent-form" class="form">
+          <label class="field">
+            <span>&#38382;&#39064;</span>
+            <textarea
+              id="question"
+              name="question"
+              rows="4"
+              placeholder="&#20363;&#22914;&#65306;&#20170;&#22825;&#21271;&#20140;&#22825;&#27668;&#24590;&#20040;&#26679;&#65311;"
+              required
+            ></textarea>
+          </label>
+
+          <label class="field">
+            <span>&#22270;&#29255;&#36335;&#24452;&#25110; URL&#65288;&#21487;&#36873;&#65289;</span>
+            <input
+              id="image_source"
+              name="image_source"
+              type="text"
+              placeholder="&#20363;&#22914;&#65306;D:\path\scene1.jpg &#25110; https://example.com/demo.jpg"
+            />
+          </label>
+
+          <div class="actions">
+            <button id="submit-btn" type="submit">&#21457;&#36865;&#35831;&#27714;</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel result-panel">
+        <div class="result-header">
+          <h2>&#36820;&#22238;&#32467;&#26524;</h2>
+          <span id="status" class="status">&#31561;&#24453;&#35831;&#27714;</span>
+        </div>
+
+        <div class="result-block">
+          <h3>&#33258;&#28982;&#35821;&#35328;&#22238;&#31572;</h3>
+          <pre id="answer" class="result-text">&#26242;&#26080;&#32467;&#26524;</pre>
+        </div>
+
+        <div class="result-block">
+          <h3>&#32467;&#26500;&#21270; JSON</h3>
+          <pre id="structured" class="result-json">&#26242;&#26080;&#32467;&#26524;</pre>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+  </html>
